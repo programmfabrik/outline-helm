@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "outline.fullname" . }}
+  labels:
+    {{- include "outline.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "outline.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "outline.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "outline.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-migration
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "yarn"
+          args:
+            - 'db:migrate'
+          envFrom:
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-s3
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-db
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-redis
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-mail
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-authentication
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-slack
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-config
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-s3
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-db
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-redis
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-mail
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-authentication
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-slack
+            - configMapRef:
+                name: {{ include "outline.fullname" . }}-config
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

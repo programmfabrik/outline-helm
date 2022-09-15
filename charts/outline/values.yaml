@@ -1,0 +1,210 @@
+# Default values for outline.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: outlinewiki/outline
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.66.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+outlineSecrets:
+  # The database configuration used to connect outline to a postgres database.
+  db:
+    # The database username.
+    user: outline
+    # The database password.
+    password: outline
+    # The database name.
+    database: outline
+    # The database host.
+    host: ""
+    # The database port.
+    port: 5432
+    # The database ssl-mode.
+    sslmode: disable
+    # The database minimum connection pool size.
+    connectionPoolMin: 2
+    # The database maximum connection pool size.
+    connectionPoolMax: 10
+  redis:
+    # For redis you can either specify an ioredis compatible url like: redis://localhost:6379
+    # or alternatively, if you would like to provide addtional connection options,
+    # use a base64 encoded JSON connection option object. Refer to the ioredis documentation
+    # for a list of available options.
+    # Example: Use Redis Sentinel for high availability
+    # {"sentinels":[{"host":"sentinel-0","port":26379},{"host":"sentinel-1","port":26379}],"name":"mymaster"}
+    # example: ioredis://eyJzZW50aW5lbHMiOlt7Imhvc3QiOiJzZW50aW5lbC0wIiwicG9ydCI6MjYzNzl9LHsiaG9zdCI6InNlbnRpbmVsLTEiLCJwb3J0IjoyNjM3OX1dLCJuYW1lIjoibXltYXN0ZXIifQ==
+    url:
+  s3:
+    # The AWS S3 bucket name
+    bucket: ""
+    # The AWS S3 bucket region
+    region: ""
+    # The AWS S3 bucket access key
+    accessKey: ""
+    # The AWS S3 bucket secret key
+    secretKey: ""
+    # The AWS S3 bucket endpoint
+    endpoint: ""
+    # The AWS S3 bucket ACL
+    acl: "private"
+    # The AWS S3 bucket prefix
+    prefix: ""
+  mail:
+    # The SMTP host
+    host: ""
+    # The SMTP port
+    port: 587
+    # The SMTP username
+    user: ""
+    # The SMTP password
+    pass: ""
+    # The SMTP from address
+    from: ""
+    # The SMTP address the user can reply to
+    reply_email: ""
+    # The SMTP ciphers to use
+    tls_ciphers: ""
+    # The SMTP secure connection
+    secure: false
+  authentication:
+    google: {}
+      # # The Google OAuth client ID
+      # clientId: ""
+      # # The Google OAuth client secret
+      # clientSecret: ""
+    azure: {}
+      # # The Azure OAuth client ID
+      # clientId: ""
+      # # The Azure OAuth client secret
+      # clientSecret: ""
+      # # The Azure OAuth tenant ID
+      # app_id: ""
+    slack: {}
+      # # The Slack OAuth key
+      # key: ""
+      # # The Slack OAuth secret
+      # secret: ""
+    oidc: {}
+      # # The OIDC client ID
+      # clientID: ""
+      # # The OIDC client secret
+      # clientSecret: ""
+      # # The OIDC issuer URL
+      # authURI: ""
+      # # The OIDC token URL
+      # tokenURI: ""
+      # # The OIDC user info URL
+      # userInfoURI: ""
+      # # The OIDC username claim
+      # usernameClaim: ""
+      # # The OIDC displayname claim
+      # displayName: ""
+      # # The OIDC claims
+      # scopes: ""
+    gitlab: {}
+      # # The Gitlab OAuth authentication URL
+      # authURI: ""
+      # # The Gitlab OAuth token URL
+      # tokenURI: ""
+      # # The Gitlab OAuth user info URL
+      # userInfoURI: ""
+      # # The Gitlab OAuth username claim
+      # usernameClaim: ""
+      # # The Gitlab OAuth displayname claim
+      # displayName: ""
+      # # The Gitlab OAuth scopes
+      # scopes: ""
+    saml: {}
+      # # The SAML sso endpoint URL
+      # ssoEndpoint: ""
+      # # The SAML sso certificate
+      # cert: ""
+  config:
+    allowedDomains: ""
+    collaborationURL: ""
+    debug: http
+    defaultLanguage: eu_US
+    enableUpdates: false
+    forceHTTPS: false
+    googleAnalyticsId: ""
+    maxImportSize: 5120000
+    sentryDSN: ""
+    teamLogo: ""
+    url: ""
+    webConcurrency: 1
