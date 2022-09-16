@@ -3,17 +3,16 @@ apiVersion: v1
 metadata:
   name: {{ include "outline.fullname" . }}-config
 data:
-  outline.conf: |
-    PORT={{ .Values.service.port }}
-    ALLOWED_DOMAINS: {{ .Values.outline.config.allowedDomains }}
-    COLLABORATION_URL: {{ .Values.outline.config.collaborationURL }}
-    DEBUG: {{ .Values.outline.config.debug }}
-    DEFAULT_LANGUAGE: {{ .Values.outline.config.defaultLanguage }}
-    ENABLE_UPDATES: {{ .Values.outline.config.enableUpdates }}
-    FORCE_HTTPS: {{ .Values.outline.config.forceHTTPS }}
-    GOOGLE_ANALYTICS_ID: {{ .Values.outline.config.googleAnalyticsId }}
-    MAXIMUM_IMPORT_SIZE: {{ .Values.outline.config.maxImportSize }}
-    SENTRY_DSN: {{ .Values.outline.config.sentryDSN }}
-    TEAM_LOGO: {{ .Values.outline.config.teamLogo }}
-    URL: {{ .Values.outline.config.url }}
-    WEB_CONCURRENCY: {{ .Values.outline.config.webConcurrency }}
+  PORT: '{{ .Values.service.port }}'
+  ALLOWED_DOMAINS: '{{ .Values.outline.config.allowedDomains }}'
+  COLLABORATION_URL: '{{ .Values.outline.config.collaborationURL }}'
+  DEBUG: '{{ .Values.outline.config.debug }}'
+  DEFAULT_LANGUAGE: '{{ .Values.outline.config.defaultLanguage }}'
+  ENABLE_UPDATES: '{{ .Values.outline.config.enableUpdates }}'
+  FORCE_HTTPS: '{{ .Values.outline.config.forceHTTPS }}'
+  GOOGLE_ANALYTICS_ID: '{{ .Values.outline.config.googleAnalyticsId }}'
+  MAXIMUM_IMPORT_SIZE: '{{ .Values.outline.config.maxImportSize }}'
+  SENTRY_DSN: '{{ .Values.outline.config.sentryDSN }}'
+  TEAM_LOGO: '{{ .Values.outline.config.teamLogo }}'
+  URL: '{{ .Values.outline.config.url }}'
+  WEB_CONCURRENCY: '{{ .Values.outline.config.webConcurrency }}'
