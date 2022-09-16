@@ -5,6 +5,11 @@ dep-install:
 	pip3 install yamale
 	pip3 install --user yamllint
 
+# updates helm dependencies
+update:
+	cd charts/outline && \
+	helm dependency update
+
 # install: installs the chart into the current selected Kubernetes cluster
 install:
 	ct install \
