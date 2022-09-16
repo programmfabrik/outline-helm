@@ -51,7 +51,7 @@ spec:
             - secretRef:
                 name: {{ include "outline.fullname" . }}-utils
             - configMapRef:
-              name: {{ include "outline.fullname" . }}-config
+                name: {{ include "outline.fullname" . }}-config
           resources:
             limits:
               memory: "256Mi"
@@ -78,7 +78,7 @@ spec:
             - secretRef:
                 name: {{ include "outline.fullname" . }}-utils
             - configMapRef:
-              name: {{ include "outline.fullname" . }}-config
+                name: {{ include "outline.fullname" . }}-config
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
