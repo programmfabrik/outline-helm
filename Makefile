@@ -1,4 +1,4 @@
-EXTRA_ARGS?=""
+EXTRA_ARGS ?= ""
 
 # dep-install: installs dependencies needed to execute "ct"
 dep-install:
