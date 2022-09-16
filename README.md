@@ -2,6 +2,9 @@
 
 Deploy [outline](https://github.com/outline/outline) with helm in K8s.
 
+WIP
+
+
 ## Requirements
 
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
