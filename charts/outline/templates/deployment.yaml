@@ -37,21 +37,21 @@ spec:
             - 'db:migrate'
           envFrom:
             - secretRef:
-                name: {{ include "outline.fullname" . }}-s3
+                name: {{ include "outline.fullname" . }}-app-s3
             - secretRef:
-                name: {{ include "outline.fullname" . }}-db
+                name: {{ include "outline.fullname" . }}-app-db
             - secretRef:
-                name: {{ include "outline.fullname" . }}-redis
+                name: {{ include "outline.fullname" . }}-app-redis
             - secretRef:
-                name: {{ include "outline.fullname" . }}-mail
+                name: {{ include "outline.fullname" . }}-app-mail
             - secretRef:
-                name: {{ include "outline.fullname" . }}-authentication
+                name: {{ include "outline.fullname" . }}-app-authentication
             - secretRef:
-                name: {{ include "outline.fullname" . }}-integration
+                name: {{ include "outline.fullname" . }}-app-integration
             - secretRef:
-                name: {{ include "outline.fullname" . }}-utils
+                name: {{ include "outline.fullname" . }}-app-utils
             - configMapRef:
-                name: {{ include "outline.fullname" . }}-config
+                name: {{ include "outline.fullname" . }}-app-config
           resources:
             limits:
               memory: "256Mi"
@@ -64,21 +64,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - secretRef:
-                name: {{ include "outline.fullname" . }}-s3
+                name: {{ include "outline.fullname" . }}-app-s3
             - secretRef:
-                name: {{ include "outline.fullname" . }}-db
+                name: {{ include "outline.fullname" . }}-app-db
             - secretRef:
-                name: {{ include "outline.fullname" . }}-redis
+                name: {{ include "outline.fullname" . }}-app-redis
             - secretRef:
-                name: {{ include "outline.fullname" . }}-mail
+                name: {{ include "outline.fullname" . }}-app-mail
             - secretRef:
-                name: {{ include "outline.fullname" . }}-authentication
+                name: {{ include "outline.fullname" . }}-app-authentication
             - secretRef:
-                name: {{ include "outline.fullname" . }}-integration
+                name: {{ include "outline.fullname" . }}-app-integration
             - secretRef:
-                name: {{ include "outline.fullname" . }}-utils
+                name: {{ include "outline.fullname" . }}-app-utils
             - configMapRef:
-                name: {{ include "outline.fullname" . }}-config
+                name: {{ include "outline.fullname" . }}-app-config
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
