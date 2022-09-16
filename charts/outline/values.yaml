@@ -82,7 +82,7 @@ tolerations: []
 
 affinity: {}
 
-outlineSecrets:
+outline:
   # The database configuration used to connect outline to a postgres database.
   db:
     # The database username.
@@ -125,6 +125,10 @@ outlineSecrets:
     acl: "private"
     # The AWS S3 bucket prefix
     prefix: ""
+    # The AWS S3 max file size in bytes
+    maxUploadSize: 10000000
+    # Whether to force path style URLs
+    forcePathStyle: false
   mail:
     # The SMTP host
     host: ""
@@ -195,16 +199,58 @@ outlineSecrets:
       # ssoEndpoint: ""
       # # The SAML sso certificate
       # cert: ""
+  integration:
+    slack:
+      # The Slack verification token
+      token: ""
+      # The Slack app ID
+      appID: ""
+      # Whether to enable Slack message notifications
+      message: true
   config:
+    # Comma separated list of domains to be allowed to signin to the wiki. If not
+    # set, all domains are allowed by default when using Google OAuth to signin
     allowedDomains: ""
+    # See [documentation](docs/SERVICES.md) on running a separate collaboration
+    # server, for normal operation this does not need to be set.
     collaborationURL: ""
+    # Configures the modules to be logged to the console.
+    # sql,cache,presenters,events,importer,exporter,emails,mailer,http
     debug: http
+    # The default interface language. See translate.getoutline.com for a list of
+    # available language codes and their rough percentage translated.
     defaultLanguage: eu_US
+    # Have the installation check for updates by sending anonymized statistics to
+    # the maintainers
     enableUpdates: false
+    # Auto-redirect to https in production. The default is true but you may set to
+    # false if you can be sure that SSL is terminated at an external loadbalancer.
     forceHTTPS: false
+    # Optionally enable google analytics to track pageviews in the knowledge base
     googleAnalyticsId: ""
+    # Override the maxium size of document imports, could be required if you have
+    # especially large Word documents with embedded imagery
     maxImportSize: 5120000
+    # Optionally enable Sentry (sentry.io) to track errors and performance
     sentryDSN: ""
+    # Custom logo that displays on the authentication screen, scaled to height=60px
     teamLogo: ""
+    # URL should point to the fully qualified, publicly accessible URL. If using a
+    # proxy the port in URL and PORT may be different.
     url: ""
+    # How many processes should be spawned. As a reasonable rule divide your servers
+    # available memory by 512 for a rough estimate
     webConcurrency: 1
+  secrets:
+    # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
+    # in your terminal to generate a random value.
+    #
+    # Please note that this value should be kept secret and should not be shared with anyone.
+    # We recommend to change this value before deploying Outline.
+    key: "3c510bcb7d0c4891f7142980a7738a09581546d1ed256603ae87a910d84c61b2"
+    # Generate a unique random key. The format is not important but you could still use
+    # `openssl rand -hex 32` in your terminal to produce this.
+    #
+    # Please note that this value should be kept secret and should not be shared with anyone.
+    # We recommend to change this value before deploying Outline.
+    secret: "b135928dd54c072bc8d7ebf1b1af76954d4dd657276f05cb58d81d4da3177ac9"

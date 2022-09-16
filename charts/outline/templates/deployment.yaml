@@ -44,12 +44,14 @@ spec:
                 name: {{ include "outline.fullname" . }}-redis
             - secretRef:
                 name: {{ include "outline.fullname" . }}-mail
-            - configMapRef:
+            - secretRef:
                 name: {{ include "outline.fullname" . }}-authentication
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-integration
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-utils
             - configMapRef:
-                name: {{ include "outline.fullname" . }}-slack
-            - configMapRef:
-                name: {{ include "outline.fullname" . }}-config
+              name: {{ include "outline.fullname" . }}-config
           resources:
             limits:
               memory: "256Mi"
@@ -69,12 +71,14 @@ spec:
                 name: {{ include "outline.fullname" . }}-redis
             - secretRef:
                 name: {{ include "outline.fullname" . }}-mail
-            - configMapRef:
+            - secretRef:
                 name: {{ include "outline.fullname" . }}-authentication
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-integration
+            - secretRef:
+                name: {{ include "outline.fullname" . }}-utils
             - configMapRef:
-                name: {{ include "outline.fullname" . }}-slack
-            - configMapRef:
-                name: {{ include "outline.fullname" . }}-config
+              name: {{ include "outline.fullname" . }}-config
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
