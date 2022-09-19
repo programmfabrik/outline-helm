@@ -79,7 +79,7 @@ minio:
       versioning: true
       objectlocking: false
 # postgresql deployment
-postgresql:
+postgresql-ha:
   enabled: true
   projectName: postgres
   postgresql:
