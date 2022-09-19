@@ -9,10 +9,10 @@ minio:
   replicas: 3
   projectName: minio
   image:
-    repository: outlinewiki/outline
+    repository: quay.io/minio/minio
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.66.0"
+    tag: "RELEASE.2022-09-01T23-53-36Z"
   rootUser: minio
   rootPassword: minio123
   persistence:
