@@ -81,7 +81,6 @@ minio:
 # postgresql deployment
 postgresql-ha:
   enabled: true
-  projectName: postgres
   postgresql:
     image:
       registry: docker.io
@@ -252,23 +251,23 @@ outline:
     maxUploadSize: 10000000
     # Whether to force path style URLs
     forcePathStyle: false
-  mail:
-    # The SMTP host
-    host: ""
-    # The SMTP port
-    port: 587
-    # The SMTP username
-    user: ""
-    # The SMTP password
-    pass: ""
-    # The SMTP from address
-    from: ""
-    # The SMTP address the user can reply to
-    reply_email: ""
-    # The SMTP ciphers to use
-    tls_ciphers: ""
-    # The SMTP secure connection
-    secure: false
+  mail: {}
+    # # The SMTP host
+    # host: ""
+    # # The SMTP port
+    # port: 587
+    # # The SMTP username
+    # user: ""
+    # # The SMTP password
+    # pass: ""
+    # # The SMTP from address
+    # from: ""
+    # # The SMTP address the user can reply to
+    # reply_email: ""
+    # # The SMTP ciphers to use
+    # tls_ciphers: ""
+    # # The SMTP secure connection
+    # secure: false
   authentication:
     google: {}
       # # The Google OAuth client ID
@@ -323,13 +322,13 @@ outline:
       # # The SAML sso certificate
       # cert: ""
   integration:
-    slack:
-      # The Slack verification token
-      token: ""
-      # The Slack app ID
-      appID: ""
-      # Whether to enable Slack message notifications
-      message: true
+    slack: {}
+      # # The Slack verification token
+      # token: ""
+      # # The Slack app ID
+      # appID: ""
+      # # Whether to enable Slack message notifications
+      # message: true
   config:
     # Comma separated list of domains to be allowed to signin to the wiki. If not
     # set, all domains are allowed by default when using Google OAuth to signin
@@ -360,7 +359,7 @@ outline:
     teamLogo: ""
     # URL should point to the fully qualified, publicly accessible URL. If using a
     # proxy the port in URL and PORT may be different.
-    url: ""
+    url: "http://outline.example.com"
     # How many processes should be spawned. As a reasonable rule divide your servers
     # available memory by 512 for a rough estimate
     webConcurrency: 1
