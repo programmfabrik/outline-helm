@@ -365,7 +365,7 @@ outline:
     teamLogo: ""
     # URL should point to the fully qualified, publicly accessible URL. If using a
     # proxy the port in URL and PORT may be different.
-    url: "http://outline.example.com"
+    url: "http://localhost:3000"
     # How many processes should be spawned. As a reasonable rule divide your servers
     # available memory by 512 for a rough estimate
     webConcurrency: 1
