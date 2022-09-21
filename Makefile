@@ -27,3 +27,10 @@ lint:
 		--lint-conf config/lintconf.yaml \
 		--debug \
 		${EXTRA_ARGS}
+
+# using helm install to install the chart into the current selected Kubernetes cluster
+local-install:
+	helm install outline charts/outline \
+		--namespace outline \
+		--create-namespace \
+		-f charts/outline/values.yaml
