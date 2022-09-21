@@ -69,16 +69,23 @@ minio:
     # the first user will be used as ouline user
     - accessKey: outline
       secretKey: outlinesecret123
-      policy: readwrite
-    - accessKey: root
-      secretKey: adminConsole123
-      policy: consoleAdmin
+      policy: outlinebucketrw
   buckets:
     - name: outline
       policy: none
       purge: false
       versioning: true
       objectlocking: false
+  policies:
+    - name: outlinebucketrw
+      statements:
+        - resources:
+          - 'arn:aws:s3:::outline/*'
+          actions:
+          - 's3:*'
+          conditions:
+            - StringEquals: '"aws:username": "outline"'
+
 # postgresql deployment
 postgresql-ha:
   enabled: true
