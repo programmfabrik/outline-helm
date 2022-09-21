@@ -24,3 +24,13 @@ make lint
 ```bash
 make install
 ```
+
+## ATTENTION
+
+When using the embedded minio deployment, make sure to expose minio in order to be able to upload files. If you decide to use the embedded minio deployment, but you are not exposing it to the outside world, you won't be able to upload files. Outline will still work, but you won't be able to upload files. The message that you will see is `Upload Failed!`
+
+The Console will show the following message in addition to the one above:
+
+```txt
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://outline-minio.outline.svc:9000/. (Reason: CORS request did not succeed). Status code: (null).
+```
