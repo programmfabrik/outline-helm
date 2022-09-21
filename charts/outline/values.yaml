@@ -262,7 +262,7 @@ outline:
     # The AWS S3 bucket prefix
     prefix: ""
     # The AWS S3 max file size in bytes
-    maxUploadSize: 10000000
+    maxUploadSize: "10000000"
     # Whether to force path style URLs
     forcePathStyle: false
   mail: {}
