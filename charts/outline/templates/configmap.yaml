@@ -18,3 +18,4 @@ data:
   TEAM_LOGO: '{{ .Values.outline.config.teamLogo }}'
   URL: '{{ .Values.outline.config.url }}'
   WEB_CONCURRENCY: '{{ .Values.outline.config.webConcurrency }}'
+  NODE_ENV: 'production'
