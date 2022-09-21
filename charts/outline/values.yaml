@@ -177,14 +177,14 @@ service:
   port: 3000
 
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
-    - host: chart-example.local
+    - host: localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -373,7 +373,7 @@ outline:
     teamLogo: ""
     # URL should point to the fully qualified, publicly accessible URL. If using a
     # proxy the port in URL and PORT may be different.
-    url: "http://localhost:3000"
+    url: "http://localhost"
     # How many processes should be spawned. As a reasonable rule divide your servers
     # available memory by 512 for a rough estimate
     webConcurrency: 1
