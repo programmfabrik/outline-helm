@@ -5,8 +5,8 @@ on:
     branches:
       - "**"
     paths:
-      - .github/workflows/helm_execserver_tests.yml
-      - charts/execserver/**
+      - .github/workflows/tests.yml
+      - charts/outline/**
 
 env:
   minikube_version: 'v1.26.0'
@@ -65,7 +65,7 @@ jobs:
           - kubernetes_version: 'v1.23.3'
           - kubernetes_version: 'v1.24.1'
     env:
-      TMUX_SESSION_NAME: execserver-tests
+      TMUX_SESSION_NAME: outline-tests
       NAMESPACE: "default"
       SERVICE_NAME: "ex1"
       VALIDATION_SERVICES: "node,convert,ffmpeg,soffice,metadata,pdf2pages,xslt,copy,iiif"
@@ -127,7 +127,7 @@ jobs:
           - kubernetes_version: 'v1.24.1'
           - kubernetes_version: 'v1.25.0'
     env:
-      TMUX_SESSION_NAME: execserver-tests
+      TMUX_SESSION_NAME: outline-tests
       NAMESPACE: "default"
       SERVICE_NAME: "ex1"
       VALIDATION_SERVICES: "node,convert,ffmpeg,soffice,metadata,pdf2pages,xslt,copy,iiif"
