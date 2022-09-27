@@ -28,6 +28,12 @@ lint:
 		--debug \
 		${EXTRA_ARGS}
 
+docs:
+	helm-docs \
+		--chart-search-root . \
+		--output-file README.md \
+		--template-files config/helm_docs.tmpl
+
 # using helm install to install the chart into the current selected Kubernetes cluster
 local-install:
 	helm install outline charts/outline \

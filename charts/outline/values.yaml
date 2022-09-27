@@ -2,7 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# minio deployment (s3 storage)
+# -- minio deployment (s3 storage)
+# for more information see: https://github.com/minio/minio/tree/master/helm/minio
 minio:
   # configuration from: https://github.com/minio/minio/blob/master/helm/minio/values.yaml
   enabled: true
@@ -86,7 +87,8 @@ minio:
           conditions:
             - StringEquals: '"aws:username": "outline"'
 
-# postgresql deployment
+# -- postgresql deployment
+# for more information see: https://github.com/bitnami/charts/tree/master/bitnami/postgresql-ha
 postgresql-ha:
   enabled: true
   pgpool:
@@ -116,7 +118,8 @@ postgresql-ha:
     accessModes:
     - ReadWriteOnce
     size: 10Gi
-# redis deployment
+# -- redis deployment
+# for more information see: https://github.com/bitnami/charts/tree/master/bitnami/redis
 redis:
   enabled: true
   projectName: redis
@@ -143,7 +146,7 @@ replicaCount: 1
 image:
   repository: outlinewiki/outline
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  # -- Overrides the image tag whose default is the chart appVersion.
   tag: "0.66.0"
 
 imagePullSecrets: []
@@ -151,11 +154,11 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
+  # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
@@ -219,26 +222,26 @@ tolerations: []
 affinity: {}
 
 outline:
-  # The database configuration used to connect outline to a postgres database.
+  # -- The database configuration used to connect outline to a postgres database.
   db:
-    # The database username.
+    # -- The database username.
     user: outline
-    # The database password.
+    # -- The database password.
     password: outline
-    # The database name.
+    # -- The database name.
     database: outline
-    # The database host.
+    # -- The database host.
     host: "postgres"
-    # The database port.
+    # -- The database port.
     port: 5432
-    # The database ssl-mode.
+    # -- The database ssl-mode.
     sslmode: disable
-    # The database minimum connection pool size.
+    # -- The database minimum connection pool size.
     connectionPoolMin: 2
-    # The database maximum connection pool size.
+    # -- The database maximum connection pool size.
     connectionPoolMax: 10
   redis:
-    # For redis you can either specify an ioredis compatible url like: redis://localhost:6379
+    # -- For redis you can either specify an ioredis compatible url like: redis://localhost:6379
     # or alternatively, if you would like to provide addtional connection options,
     # use a base64 encoded JSON connection option object. Refer to the ioredis documentation
     # for a list of available options.
@@ -247,76 +250,81 @@ outline:
     # example: ioredis://eyJzZW50aW5lbHMiOlt7Imhvc3QiOiJzZW50aW5lbC0wIiwicG9ydCI6MjYzNzl9LHsiaG9zdCI6InNlbnRpbmVsLTEiLCJwb3J0IjoyNjM3OX1dLCJuYW1lIjoibXltYXN0ZXIifQ==
     url: redis://redis:6379
   s3:
-    # The AWS S3 bucket name
+    # -- The AWS S3 bucket name
     bucket: "outline"
-    # The AWS S3 bucket region
+    # -- The AWS S3 bucket region
     region: "us-east-1"
-    # The AWS S3 bucket access key
+    # -- The AWS S3 bucket access key
     accessKey: "outline"
-    # The AWS S3 bucket secret key
+    # -- The AWS S3 bucket secret key
     secretKey: "outline"
-    # The AWS S3 bucket endpoint
+    # -- The AWS S3 bucket endpoint
     endpoint: "minio:9000"
-    # The AWS S3 bucket ACL
+    # -- The AWS S3 bucket ACL
     acl: "private"
-    # The AWS S3 bucket prefix
+    # -- The AWS S3 bucket prefix
     prefix: ""
-    # The AWS S3 max file size in bytes
+    # -- The AWS S3 max file size in bytes
     maxUploadSize: "10000000"
-    # Whether to force path style URLs
+    # -- Whether to force path style URLs
     forcePathStyle: false
   mail: {}
-    # # The SMTP host
+    # -- The SMTP host
     # host: ""
-    # # The SMTP port
+    # -- The SMTP port
     # port: 587
-    # # The SMTP username
+    # -- The SMTP username
     # user: ""
-    # # The SMTP password
+    # -- The SMTP password
     # pass: ""
-    # # The SMTP from address
+    # -- The SMTP from address
     # from: ""
-    # # The SMTP address the user can reply to
+    # -- The SMTP address the user can reply to
     # reply_email: ""
-    # # The SMTP ciphers to use
+    # -- The SMTP ciphers to use
     # tls_ciphers: ""
-    # # The SMTP secure connection
+    # -- The SMTP secure connection
     # secure: false
   authentication:
+    # -- The Google OAuth2 Client settings
     google: {}
-      # # The Google OAuth client ID
+      # -- The Google OAuth client ID
       # clientId: ""
-      # # The Google OAuth client secret
+      # -- The Google OAuth client secret
       # clientSecret: ""
+    # -- The azure OAuth2 Client settings
     azure: {}
-      # # The Azure OAuth client ID
+      # -- The Azure OAuth client ID
       # clientId: ""
-      # # The Azure OAuth client secret
+      # -- The Azure OAuth client secret
       # clientSecret: ""
-      # # The Azure OAuth tenant ID
+      # -- The Azure OAuth tenant ID
       # app_id: ""
+    # -- The Slack OAuth2 Client settings
     slack: {}
-      # # The Slack OAuth key
+      # -- The Slack OAuth key
       # key: ""
-      # # The Slack OAuth secret
+      # -- The Slack OAuth secret
       # secret: ""
+    # -- The OIDC client settings
     oidc: {}
-      # # The OIDC client ID
+      # -- The OIDC client ID
       # clientID: ""
-      # # The OIDC client secret
+      # -- The OIDC client secret
       # clientSecret: ""
-      # # The OIDC issuer URL
+      # -- The OIDC issuer URL
       # authURI: ""
-      # # The OIDC token URL
+      # -- The OIDC token URL
       # tokenURI: ""
-      # # The OIDC user info URL
+      # -- The OIDC user info URL
       # userInfoURI: ""
-      # # The OIDC username claim
+      # -- The OIDC username claim
       # usernameClaim: ""
-      # # The OIDC displayname claim
+      # -- The OIDC displayname claim
       # displayName: ""
-      # # The OIDC claims
+      # -- The OIDC claims
       # scopes: ""
+    # -- The Gitlab OAuth2 Client settings
     gitlab: {}
       # # The Gitlab OAuth authentication URL
       # authURI: ""
@@ -330,6 +338,7 @@ outline:
       # displayName: ""
       # # The Gitlab OAuth scopes
       # scopes: ""
+    # -- The SAML client settings
     saml: {}
       # # The SAML sso endpoint URL
       # ssoEndpoint: ""
@@ -337,60 +346,60 @@ outline:
       # cert: ""
   integration:
     slack: {}
-      # # The Slack verification token
+      # -- The Slack verification token
       # token: ""
-      # # The Slack app ID
+      # -- The Slack app ID
       # appID: ""
-      # # Whether to enable Slack message notifications
+      # -- Whether to enable Slack message notifications
       # message: true
   config:
-    # Comma separated list of domains to be allowed to signin to the wiki. If not
+    # -- Comma separated list of domains to be allowed to signin to the wiki. If not
     # set, all domains are allowed by default when using Google OAuth to signin
     allowedDomains: ""
-    # See [documentation](docs/SERVICES.md) on running a separate collaboration
+    # -- See [documentation](docs/SERVICES.md) on running a separate collaboration
     # server, for normal operation this does not need to be set.
     collaborationURL: ""
-    # Configures the modules to be logged to the console.
+    # -- Configures the modules to be logged to the console.
     # sql,cache,presenters,events,importer,exporter,emails,mailer,http
     debug: http
-    # The default interface language. See translate.getoutline.com for a list of
+    # -- The default interface language. See translate.getoutline.com for a list of
     # available language codes and their rough percentage translated.
     defaultLanguage: en_US
-    # Have the installation check for updates by sending anonymized statistics to
+    # -- Have the installation check for updates by sending anonymized statistics to
     # the maintainers
     enableUpdates: false
-    # Auto-redirect to https in production. The default is true but you may set to
+    # -- Auto-redirect to https in production. The default is true but you may set to
     # false if you can be sure that SSL is terminated at an external loadbalancer.
     forceHTTPS: false
-    # Optionally enable google analytics to track pageviews in the knowledge base
+    # -- Optionally enable google analytics to track pageviews in the knowledge base
     googleAnalyticsId: ""
-    # Override the maxium size of document imports, could be required if you have
+    # -- Override the maxium size of document imports, could be required if you have
     # especially large Word documents with embedded imagery
     maxImportSize: 5120000
     # Optionally enable Sentry (sentry.io) to track errors and performance
     sentryDSN: ""
-    # Custom logo that displays on the authentication screen, scaled to height=60px
+    # -- Custom logo that displays on the authentication screen, scaled to height=60px
     teamLogo: ""
-    # URL should point to the fully qualified, publicly accessible URL. If using a
+    # -- URL should point to the fully qualified, publicly accessible URL. If using a
     # proxy the port in URL and PORT may be different.
     url: "http://localhost"
-    # How many processes should be spawned. As a reasonable rule divide your servers
+    # -- How many processes should be spawned. As a reasonable rule divide your servers
     # available memory by 512 for a rough estimate
     webConcurrency: 1
   secrets:
-    # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
+    # -- Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
     # in your terminal to generate a random value.
     #
     # Please note that this value should be kept secret and should not be shared with anyone.
     # We recommend to change this value before deploying Outline.
     key: "3c510bcb7d0c4891f7142980a7738a09581546d1ed256603ae87a910d84c61b2"
-    # Generate a unique random key. The format is not important but you could still use
+    # -- Generate a unique random key. The format is not important but you could still use
     # `openssl rand -hex 32` in your terminal to produce this.
     #
     # Please note that this value should be kept secret and should not be shared with anyone.
     # We recommend to change this value before deploying Outline.
     secret: "b135928dd54c072bc8d7ebf1b1af76954d4dd657276f05cb58d81d4da3177ac9"
-  # certTrusts defines a list of certificates that must be trusted to work with tls.
+  # -- certTrusts defines a list of certificates that must be trusted to work with tls.
   # Based on this setting, we create an init container that adds the certTrusts entries to the /etc/ssl/certs/ca-certificates.crt file.
   # We expect the value to be in the format key=value.
   # The key should be the name of the certificate and the value should be the actual certificate.
