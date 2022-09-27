@@ -39,7 +39,7 @@ spec:
             - |
               cp /etc/ssl/certs/ca-certificates.crt /certs/trust/ca-certificates.crt && \
               {{- range $key, $value := .Values.outline.certTrusts }}
-              cat /certs/untrusted/{{ $key }} | base64 -d >> /certs/trust/ca-certificates.crt && \
+              cat /certs/untrusted/{{ $key }} >> /certs/trust/ca-certificates.crt && \
               {{- end }}
               echo "TLS CA trust updated"
           envFrom:
