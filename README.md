@@ -2,13 +2,11 @@
 
 Deploy [outline](https://github.com/outline/outline) with helm in K8s.
 
-WIP
-
-
 ## Requirements
 
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - [helm](https://github.com/helm/helm/)
+- [helm-docs](https://github.com/norwoodj/helm-docs)
 - [ct](https://github.com/helm/chart-testing)
 - A local Kubernetes cluster either via [Minikube](https://minikube.sigs.k8s.io/docs/start/), [Kind](https://kind.sigs.k8s.io/) or [Docker-Desktop](https://www.docker.com/products/docker-desktop/)
 - *Yamllint*, *Yamale* simply install these packages with `make dep-install`
@@ -23,6 +21,12 @@ make lint
 
 ```bash
 make install
+```
+
+## Generate Documentation
+
+```bash
+make docs
 ```
 
 ## ATTENTION
