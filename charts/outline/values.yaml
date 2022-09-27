@@ -390,3 +390,8 @@ outline:
     # Please note that this value should be kept secret and should not be shared with anyone.
     # We recommend to change this value before deploying Outline.
     secret: "b135928dd54c072bc8d7ebf1b1af76954d4dd657276f05cb58d81d4da3177ac9"
+  # certTrusts defines a list of certificates that must be trusted to work with tls.
+  # Based on this setting, we create an init container that adds the certTrusts entries to the /etc/ssl/certs/ca-certificates.crt file.
+  # We expect the value to be in the format key=value.
+  # The key should be the name of the certificate and the value should be the actual certificate.
+  certTrusts: {}
