@@ -28,34 +28,6 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        {{ if .Values.outline.certTrusts }}
-        - name: {{ .Chart.Name }}-tls-ca-trust
-          image: alpine:latest
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - /bin/sh
-            - -ec
-          args:
-            - |
-              cp /etc/ssl/certs/ca-certificates.crt /certs/trust/ca-certificates.crt && \
-              {{- range $key, $value := .Values.outline.certTrusts }}
-              cat /certs/untrusted/{{ $key }} >> /certs/trust/ca-certificates.crt && \
-              {{- end }}
-              echo "TLS CA trust updated"
-          envFrom:
-            - secretRef:
-                name: {{ include "outline.fullname" . }}-trust
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
-          volumeMounts:
-            - name: trust
-              mountPath: /certs/trust
-              readOnly: false
-            - name: tls-certificate-authority
-              mountPath: /certs/untrusted
-        {{ end }}
         - name: {{ .Chart.Name }}-migration
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -82,9 +54,6 @@ spec:
                 name: {{ include "outline.fullname" . }}-app-config
           {{ if .Values.outline.certTrusts }}
           volumeMounts:
-          - name: trust
-            mountPath: /etc/ssl/certs
-            readOnly: true
           - name: tls-certificate-authority
             mountPath: /certs
           {{ end }}
@@ -121,9 +90,6 @@ spec:
               protocol: TCP
           {{ if .Values.outline.certTrusts }}
           volumeMounts:
-          - name: trust
-            mountPath: /etc/ssl/certs
-            readOnly: true
           - name: tls-certificate-authority
             mountPath: /certs
           {{ end }}
@@ -143,8 +109,6 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       {{ if .Values.outline.certTrusts }}
       volumes:
-        - name: trust
-          emptyDir: {}
         - name: tls-certificate-authority
           secret:
             secretName: {{ include "outline.fullname" . }}-trust
