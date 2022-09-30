@@ -3,6 +3,33 @@ entries:
   outline:
   - apiVersion: v2
     appVersion: 0.66.0
+    created: "2022-09-30T14:59:20.728047112Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.min.io/
+      version: 4.0.14
+    - condition: postgresql-ha.enabled
+      name: postgresql-ha
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.1.6
+    description: This chart deploys an outline wiki instance.
+    digest: 9ea90c220ae0c56c9b8e24885ae21c1ff4fd8ea118a9dc9c586a871abf759ee1
+    maintainers:
+    - email: leonsteinhaeuser@gmail.com
+      name: leonsteinhaeuser
+      url: https://github.com/leonsteinhaeuser
+    name: outline
+    type: application
+    urls:
+    - https://github.com/programmfabrik/outline-helm/releases/download/v0.3.2/outline-0.3.2.tgz
+    version: 0.3.2
+  - apiVersion: v2
+    appVersion: 0.66.0
     created: "2022-09-30T13:51:52.29408073Z"
     dependencies:
     - condition: minio.enabled
@@ -163,4 +190,4 @@ entries:
     urls:
     - https://github.com/programmfabrik/outline-helm/releases/download/outline-0.0.1/outline-0.0.1.tgz
     version: 0.0.1
-generated: "2022-09-30T13:51:52.29410513Z"
+generated: "2022-09-30T14:59:20.728108213Z"
