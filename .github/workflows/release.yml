@@ -35,7 +35,7 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF##/refs\/tags\/v}
+        run: echo ::set-output name=VERSION::${GITHUB_REF_NAME#v}
         shell: bash
 
       - name: Update chart version in Chart.yaml
