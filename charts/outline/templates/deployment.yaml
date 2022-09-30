@@ -85,6 +85,8 @@ spec:
           - name: trust
             mountPath: /etc/ssl/certs
             readOnly: true
+          - name: tls-certificate-authority
+            mountPath: /certs/untrusted
           {{ end }}
           resources:
             limits:
@@ -122,6 +124,8 @@ spec:
           - name: trust
             mountPath: /etc/ssl/certs
             readOnly: true
+          - name: tls-certificate-authority
+            mountPath: /certs/untrusted
           {{ end }}
           livenessProbe:
             httpGet:
