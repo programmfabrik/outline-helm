@@ -240,6 +240,13 @@ outline:
     connectionPoolMin: 2
     # -- The database maximum connection pool size.
     connectionPoolMax: 10
+    # -- Options provides additional options that are passed to the DSN.
+    # By default, we add the following options to the connection string:
+    # ?sslmode={{ .Values.outline.db.sslmode }}&application_name=outline
+    options: {}
+    #  sslcert: "/certs/mypostgres.crt"
+    #  sslkey: "/certs/mypostgres.key"
+    #  sslrootcert: "/certs/mypostgresca.crt"
   redis:
     # -- For redis you can either specify an ioredis compatible url like: redis://localhost:6379
     # or alternatively, if you would like to provide addtional connection options,
@@ -404,3 +411,9 @@ outline:
   # We expect the value to be in the format key=value.
   # The key should be the name of the certificate and the value should be the actual certificate.
   certTrusts: {}
+  #  mypostgres.crt: |
+  #    my cert value
+  #  mypostgres.key: |
+  #    my cert key value
+  #  mypostgresca.crt: |
+  #    my cert ca value
