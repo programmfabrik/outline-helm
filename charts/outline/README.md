@@ -1,6 +1,6 @@
 # outline
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.66.0](https://img.shields.io/badge/AppVersion-0.66.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.66.0](https://img.shields.io/badge/AppVersion-0.66.0-informational?style=flat-square)
 
 This chart deploys an outline wiki instance.
 
@@ -57,11 +57,12 @@ This chart deploys an outline wiki instance.
 | outline.config.teamLogo | string | `""` | Custom logo that displays on the authentication screen, scaled to height=60px |
 | outline.config.url | string | `"http://localhost"` | URL should point to the fully qualified, publicly accessible URL. If using a proxy the port in URL and PORT may be different. |
 | outline.config.webConcurrency | int | `1` | How many processes should be spawned. As a reasonable rule divide your servers available memory by 512 for a rough estimate |
-| outline.db | object | `{"connectionPoolMax":10,"connectionPoolMin":2,"database":"outline","host":"postgres","password":"outline","port":5432,"sslmode":"disable","user":"outline"}` | The database configuration used to connect outline to a postgres database. |
+| outline.db | object | `{"connectionPoolMax":10,"connectionPoolMin":2,"database":"outline","host":"postgres","options":{},"password":"outline","port":5432,"sslmode":"disable","user":"outline"}` | The database configuration used to connect outline to a postgres database. |
 | outline.db.connectionPoolMax | int | `10` | The database maximum connection pool size. |
 | outline.db.connectionPoolMin | int | `2` | The database minimum connection pool size. |
 | outline.db.database | string | `"outline"` | The database name. |
 | outline.db.host | string | `"postgres"` | The database host. |
+| outline.db.options | object | `{}` | Options provides additional options that are passed to the DSN. By default, we add the following options to the connection string: ?sslmode={{ .Values.outline.db.sslmode }}&application_name=outline |
 | outline.db.password | string | `"outline"` | The database password. |
 | outline.db.port | int | `5432` | The database port. |
 | outline.db.sslmode | string | `"disable"` | The database ssl-mode. |
