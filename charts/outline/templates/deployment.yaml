@@ -96,13 +96,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 5
           resources:
