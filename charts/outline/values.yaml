@@ -147,7 +147,7 @@ image:
   repository: outlinewiki/outline
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
-  tag: "0.66.0"
+  tag: "0.66.1"
 
 imagePullSecrets: []
 nameOverride: ""
