@@ -38,3 +38,7 @@ The Console will show the following message in addition to the one above:
 ```txt
 Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://outline-minio.outline.svc:9000/. (Reason: CORS request did not succeed). Status code: (null).
 ```
+
+## Contact us
+
+For Issues and questions please write to support@programmfabrik.de
